@@ -44,7 +44,7 @@ public:
 		return ReverseIterator(ptr - rhs);
 	}
 
-	size_t operator-(const ReverseIterator rhs)
+	size_t operator-(const ReverseIterator rhs) const
 	{
 		return rhs.ptr - ptr;
 	}

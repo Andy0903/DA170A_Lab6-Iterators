@@ -41,7 +41,7 @@ public:
 		return ForwardIterator(ptr + rhs);
 	}
 
-	size_t operator-(const ForwardIterator rhs)
+	size_t operator-(const ForwardIterator rhs) const
 	{
 		return ptr - rhs.ptr;
 	}
