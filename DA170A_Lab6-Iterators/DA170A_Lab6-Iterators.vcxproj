@@ -146,6 +146,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ForwardIterator.h" />
+    <ClInclude Include="IteratorBase.h" />
+    <ClInclude Include="ReverseIterator.h" />
+    <ClInclude Include="String.h" />
+    <ClInclude Include="StringIttTest.h" />
+    <ClInclude Include="StringTest.h" />
+    <ClInclude Include="VG.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="String.cpp" />
+    <ClCompile Include="StringIttTest.cpp" />
+    <ClCompile Include="StringTest.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,3 +1,13 @@
+#define _CRTDBG_MAP_ALLOC
+#ifdef _DEBUG
+#ifndef DBG_NEW
+#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new DBG_NEW
+#endif
+#endif  // _DEBUG
+#include <stdlib.h>
+#include <crtdbg.h>
+
 #include "VG.h"
 
 #include "String.h"
@@ -172,3 +182,14 @@ void TestFörGodkäntItt() {
 }
 #endif Itt
 
+int main()
+{
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	std::locale::global(std::locale("swedish"));
+	//TestFörGodkäntString();
+	//TestFörVälGodkäntString();
+	TestFörGodkäntItt();
+
+	std::cin.get();
+	return 0;
+}

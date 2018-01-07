@@ -7,42 +7,25 @@
 
 String::String() : size(0), capacity(0)
 {
-	try
-	{
-		letters = new char[capacity + 1]{ '\0' };
-	}
-	catch (const std::bad_alloc &ba)
-	{
-	}
+	letters = new char[capacity + 1]{ '\0' };
 	assert(Invariant());
 }
 
 String::String(const String &rhs) : size(rhs.size), capacity(rhs.capacity)
 {
-	try
-	{
-		letters = new char[rhs.capacity + 1];
-		memcpy(letters, rhs.letters, rhs.size + 1);
-	}
-	catch (const std::bad_alloc &ba)
-	{
-	}
+
+	letters = new char[rhs.capacity + 1];
+	memcpy(letters, rhs.letters, rhs.size + 1);
 	assert(Invariant());
 }
 
 String::String(const char *cstr) : size(0), capacity(0)
 {
-	try
-	{
-		int length = strlen(cstr);
-		letters = new char[length + 1];
-		size = length;
-		capacity = length;
-		memcpy(letters, cstr, length + 1);
-	}
-	catch (const std::bad_alloc &ba)
-	{
-	}
+	int length = strlen(cstr);
+	letters = new char[length + 1];
+	size = length;
+	capacity = length;
+	memcpy(letters, cstr, length + 1);
 	assert(Invariant());
 }
 
@@ -57,20 +40,12 @@ String::String(String &&rhs) : size(std::move(rhs.size)), capacity(std::move(rhs
 String& String::operator=(const String & rhs)
 {
 	assert(Invariant());
-
-	try
-	{
-		char* temp = new char[rhs.capacity + 1];
-		memcpy(temp, rhs.letters, rhs.size + 1);
-		delete[] letters;
-		letters = temp;
-		capacity = rhs.capacity;
-		size = rhs.size;
-	}
-	catch (const std::bad_alloc &ba)
-	{
-	}
-
+	char* temp = new char[rhs.capacity + 1];
+	memcpy(temp, rhs.letters, rhs.size + 1);
+	delete[] letters;
+	letters = temp;
+	capacity = rhs.capacity;
+	size = rhs.size;
 	assert(Invariant());
 	return *this;
 }
@@ -81,7 +56,7 @@ String& String::operator=(String &&rhs)
 	if (this != &rhs)
 	{
 		delete[] letters;
-		
+
 		size = std::move(rhs.size);
 		capacity = std::move(rhs.capacity);
 		letters = std::move(rhs.letters);
@@ -135,22 +110,17 @@ void String::Push_back(const char c)
 void String::Resize(size_t n)
 {
 	assert(Invariant());
-	try
+
+	char *temp = new char[n + 1];
+	capacity = n;
+	memcpy(temp, letters, size);
+	for (size_t i = size; i < n + 1; ++i)
 	{
-		char *temp = new char[n + 1];
-		capacity = n;
-		memcpy(temp, letters, size);
-		for (size_t i = size; i < n + 1; ++i)
-		{
-			temp[i] = '\0';
-		}
-		size = n;
-		delete[] letters;
-		letters = temp;
+		temp[i] = '\0';
 	}
-	catch (const std::bad_alloc &ba)
-	{
-	}
+	size = n;
+	delete[] letters;
+	letters = temp;
 	assert(Invariant());
 }
 
